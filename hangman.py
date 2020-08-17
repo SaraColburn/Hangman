@@ -14,6 +14,56 @@ import string
 
 WORDLIST_FILENAME = "words.txt"
 
+HANGMANPICS = ['''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========''']
 
 def load_words():
     """
@@ -97,6 +147,8 @@ def get_available_letters(letters_guessed):
             result += letter
     return result
 
+def get_illustration_string(guesses_left):
+    return HANGMANPICS[6-guesses_left]
 
 
 def hangman(secret_word):
@@ -141,6 +193,7 @@ def hangman(secret_word):
     while guesses_left > 0 and warnings_left > 0 and not game_won:
     #   start turn
         print("You have", guesses_left, "incorrect guesses left")
+        print(get_illustration_string(guesses_left))
         print("Available guesses:", get_available_letters(letters_guessed))
     #   get guess from user
         guess = input("Please guess a letter: ")
